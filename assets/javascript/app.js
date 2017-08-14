@@ -48,7 +48,7 @@ var questions = [{
 var game = {
   questions:questions,
   currentQuestion:0,
-  counter:300000,
+  counter:30,
   correct:0,
   incorrect:0,
   unanswered:0,
