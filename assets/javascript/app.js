@@ -1,123 +1,145 @@
-// Variable for the game 
+$('#start').on("click", function(){
+    $('#start').remove();
+    game.loadQuestion();
+})
 
+$(document).on("click", ".answer-button", function(e){
+  game.clicked(e);
+})
 
-// var questions = [{
-// 	question: "	Who was the last player with at least 10 multi-homer games in a season?",
-// 	choices: ["Albert Pujols", "Barry Bonds", "Babe Ruth", "Nelson Cruz"],
-// 	correctAnswer: 1
-// }, {
-// 	question: "	Who is the only player to record more consecutive saves than the O's Zach Britton?",
-// 	choices: ["Craig Kimbrel", "Eric Gagne", "Aroldis Chapman", "Kenley Jansen"],
-// 	correctAnswer: 2
-// }, {
-// 	question: "Which pitcher hold the record for most strikeouts?",
-// 	choices: ["Randy Johnson", "Steve Carlton", "Roger Clemens", "Nolan Ryan"],
-// 	correctAnswer: 4
-// }, {
-// 	question: "who holds the record for most Home Runs?",
-// 	choices: ["Barry Bonds", "Hank Aaron", "Babe Ruth", "Alex Rodriguez"],
-// 	correctAnswer: 1
-// }, {
-// 	question: "who holds the record for most consecutibe games played at 2,632 games?",
-// 	choices: ["Derek Jeter", "Miguel Tejada", "Cal Ripken Jr.", "Lou Gehrig"],
-// 	correctAnswer: 3
-// }, {
-// 	question: "What team did Babe Ruth play for before joining the Boston Red Sox?",
-// 	choices: ["Baltimore Orioles", "New York Yankees", "Boston Braves", "Cincinnati Reds"],
-// 	correctAnswer: 1
-// }, {
-// 	question: "What team moved to D.C. to become the Washington Nationals in 2005?",
-// 	choices: ["Montreal Expos", "Tokyo Giants", "Brooklyn Dodgers", "Kansas City Monarchs"],
-// 	correctAnswer: 1
-// }];
-
-var questionArray =["Who was the last player with at least 10 multi-homer games in a season?",
-			"	Who is the only player to record more consecutive saves than the O's Zach Britton?",
-			"Which pitcher hold the record for most strikeouts?",
-			"who holds the record for most Home Runs?", "who holds the record for most consecutibe games played at 2,632 games?",
-			"What team did Babe Ruth play for before joining the Boston Red Sox?",
-			"What team moved to D.C. to become the Washington Nationals in 2005?"];
-
-var answerArray = [[" Albert Pujols ", " Barry Bonds ", " Babe Ruth ", " Nelson Cruz "],["Craig Kimbrel", "Eric Gagne", "Aroldis Chapman", "Kenley Jansen"],
-	["Randy Johnson", "Steve Carlton", "Roger Clemens", "Nolan Ryan"], ["Barry Bonds", "Hank Aaron", "Babe Ruth", "Alex Rodriguez"],
-	["Derek Jeter", "Miguel Tejada", "Cal Ripken Jr.", "Lou Gehrig"], ["Baltimore Orioles", "New York Yankees", "Boston Braves", "Cincinnati Reds"],
-	["Montreal Expos", "Tokyo Giants", "Brooklyn Dodgers", "Kansas City Monarchs"]];
-
-var correctAnswer = ["0","1","3","0","2","0","0"]
-
-
-var selectedAnswer;
-var correctTally =0;
-var incorrectTally =0;
-var unansweredTally =0;	
-var timer = 15;
-
-
-
-
-
-
-// Functions
-// ===========================================================================================
-console.log(questionArray);
-console.log(answerArray);
-console.log(correctAnswer);
-function startGame(){
-
-}
-
-$(document).ready(function(){
-	$('#countDown').hide();
-	$('.answerchoice').hide();
-    $('.startBtn').on('click', function() {
-        $('button').hide('.startBtn');
-       	$('#countDown').show()
-       	$('.answerchoice').show();
-       	$('.container').show();
-       	// for(var i = 0; i<questionArray.length; i++){
-       	// 	document.write("<br>" + questionArray[i]);
-       	// }
-       	var myTimer = setInterval(countDown, 1000)
-
-      
-      $("#question").html("<h3>" + questionArray[0] + "</h3>");
-      $("#question").append("<p>" + answerArray[0] + "</p>");
-      $("#question").append("<p>" + correctAnswer[0] + "</p>");
-      	 if (answerArray[0] == correctAnswer[0]) {
-             wins++;
-     
-      	
-      
-
-       if(myTimer === 1 ){
-       	(newQuestion)
-
-       }}
-
-    console.log(questionArray[0] + answerArray[0]);
-        // if (answerArray[0] == correctAnswer[0]) {
-        //      wins++;
-             
-        // }   	
-
-
-    function countDown() {
-    	document.timer.field.value = timer-- + ' seconds left';
-    	if(timer === 0){
-    		clearInterval(myTimer);
-    	}
-
-    	}     	
-        countDown();
-
-
-
-
-    })
-
-
+$(document).on("click", "#reset", function(){
+  game.reset();
 })
 
 
+// Variable for the game 
 
 
+var questions = [{
+	question: "	Who was the last player with at least 10 multi-homer games in a season?",
+	answers: ["Albert Pujols", "Barry Bonds", "Babe Ruth", "Nelson Cruz"],
+	correctAnswer: "Albert Pujols",
+}, {
+	question: "	Who is the only player to record more consecutive saves than the O's Zach Britton?",
+	answers: ["Craig Kimbrel", "Eric Gagne", "Aroldis Chapman", "Kenley Jansen"],
+	correctAnswer: "Eric Gagne",
+}, {
+	question: "Which pitcher hold the record for most strikeouts?",
+	answers: ["Randy Johnson", "Steve Carlton", "Roger Clemens", "Nolan Ryan"],
+	correctAnswer: "Nolan Ryan",
+}, {
+	question: "who holds the record for most Home Runs?",
+	answers: ["Barry Bonds", "Hank Aaron", "Babe Ruth", "Alex Rodriguez"],
+	correctAnswer: "Barry Bonds",
+}, {
+	question: "who holds the record for most consecutibe games played at 2,632 games?",
+	answers: ["Derek Jeter", "Miguel Tejada", "Cal Ripken Jr.", "Lou Gehrig"],
+	correctAnswer: "Cal Ripken Jr.",
+}, {
+	question: "What team did Babe Ruth play for before joining the Boston Red Sox?",
+	answers: ["Baltimore Orioles", "New York Yankees", "Boston Braves", "Cincinnati Reds"],
+	correctAnswer: "Baltimore Orioles",
+}, {
+	question: "What team moved to D.C. to become the Washington Nationals in 2005?",
+	answers: ["Montreal Expos", "Tokyo Giants", "Brooklyn Dodgers", "Kansas City Monarchs"],
+	correctAnswer: "Montreal Expos",
+}];
+
+var game = {
+  questions:questions,
+  currentQuestion:0,
+  counter:300000,
+  correct:0,
+  incorrect:0,
+  unanswered:0,
+  countdown: function(){
+    game.counter --;
+    $("#counter").html(game.counter);
+    if(game.counter<=0){
+      console.log("time up!")
+      game.timeUp();
+    }
+
+
+  },
+  loadQuestion: function(){
+    timer = setInterval(game.countdown, 1000);
+    $("#subwrapper").html("<h2> TIME REMAINING <span id = 'counter'> 30 </span> Seconds </h2>");
+    $("#subwrapper").append("<h2>" + questions[game.currentQuestion].question + "</h2>");
+      for(var i = 0; i< questions[game.currentQuestion].answers.length; i++){
+        $("#subwrapper").append('<button class = "answer-button" id = "button- '+i+ '" data-name="' + questions[game.currentQuestion].
+              answers[i]+ '">' + questions[game.currentQuestion].answers[i]+ '</button');
+      }
+
+  },
+  nextQuestion: function(){
+    game.counter= 30;
+    $("#counter").html(game.counter);
+    game.currentQuestion++;
+    game.loadQuestion();
+
+  },
+  timeUp:function(){
+    clearInterval(timer);
+    game.unanswered++;
+    $("#subwrapper").html("<h2> OUT OF TIME!</h2>");
+    $("#subwrapper").append("<h3> The Correct Answer Was: " + questions[game.currentQuestion].correctAnswer + "</h3>");
+    if(game.currentQuestion == questions.length- 1){
+      setTimeout(game.results,3*1000);
+    }else{
+      setTimeout(game.nextQuestion,3*1000);
+    }
+
+  },
+  results:function(){
+    clearInterval(timer);
+    $("#subwrapper").html("<h2>All Done</h2>");
+    $("#subwrapper").append("<h3>Correct:" + game.correct + "</h3>");
+    $("#subwrapper").append("<h3>Incorrect:" + game.incorrect + "</h3>");
+    $("#subwrapper").append("<h3>Unanswered:" + game.unanswered + "</h3>");
+    $("#subwrapper").append("<button id = 'reset'> RESET </button>")
+
+  },
+  clicked: function(e){
+    clearInterval(timer);
+    if($(e.target).data("name")==questions[game.currentQuestion].
+      correctAnswer){
+      game.answeredCorrectly();
+  } else{
+    game.answeredIncorrectly();
+    }
+  },
+  answeredCorrectly:  function(){
+    console.log("right")
+    clearInterval(timer);
+    game.correct++;
+    $("#subwrapper").html("<h2>You Got It Right. Base Hit!!</h2>");
+    if(game.currentQuestion == questions.length- 1){
+      setTimeout(game.results,3*1000);
+    }else{
+      setTimeout(game.nextQuestion,3*1000);
+    }
+
+  },
+  answeredIncorrectly: function(){
+    console.log("wrong")
+    clearInterval(timer);
+    game.incorrect++;
+    $("#subwrapper").html("<h2>WRONG STRIKEOUT!!</h2>");
+    $("#subwrapper").append("<h3> The Correct Answer Was: " + questions[game.currentQuestion].correctAnswer + "</h3>");
+    if(game.currentQuestion == questions.length- 1){
+      setTimeout(game.results,3*1000);
+    }else{
+      setTimeout(game.nextQuestion,3*1000);
+    }
+
+  },
+  reset: function(){
+    game.currentQuestion =0;
+    game.counter =0;
+    game.correct=0;
+    game.incorrect=0;
+    game.unanswered=0;
+    game.loadQuestion();
+  }
+}
